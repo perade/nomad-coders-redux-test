@@ -5,14 +5,17 @@ const minus = document.getElementById('minus');
 const number = document.querySelector('span');
 number.innerText = 0;
 
+const ADD = 'ADD';
+const MINUS = 'MINUS'
+
 const reducer = (state = 0, action) => {
-  console.log('action', action);
-  if (action.type === 'ADD') {
-    return state + 1;
-  } else if (action.type === 'MINUS') {
-    return state - 1;
-  } else {
-    return state;
+  switch(action.type) {
+    case ADD:
+      return state + 1;
+    case MINUS:
+      return state - 1;
+    default:
+      return state;
   }
 };
 const store = createStore(reducer);
@@ -23,10 +26,10 @@ const onChange = () => {
 store.subscribe(onChange);
 
 const handleAdd = () => {
-  store.dispatch({ type: 'ADD' });
+  store.dispatch({ type: ADD });
 };
 const handleMinus = () => {
-  store.dispatch({ type: 'MINUS' });
+  store.dispatch({ type: MINUS });
 };
 
 add.addEventListener('click', handleAdd);
